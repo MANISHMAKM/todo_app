@@ -1,16 +1,19 @@
 import os
 from pathlib import Path
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRET KEY
 SECRET_KEY = os.environ.get(
-    'DJANGO_SECRET_KEY', 'django-insecure-!m2&g71aubb@jdp*nn_#!e50-wcr=nm&$%p%kw+i0fyb_igf8r')
+    'DJANGO_SECRET_KEY', 'django-insecure-!m2&g71aubb@jdp*nn_#!e50-wcr=nm&$%p%kw+i0fyb_igf8r'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', '') != 'False'
+DEBUG = os.environ.get('DEBUG', 'True') != 'False'
 
-ALLOWED_HOSTS = ['todo-app.onrender.com']
+# Allowed hosts
+ALLOWED_HOSTS = ['todo-app.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -25,6 +28,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # required for static files on Render
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,9 +79,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JS, Images)
+# Static files
 STATIC_URL = '/static/'
-STATICFILES_DIRS = []  # Optional: If using additional static folders
+STATICFILES_DIRS = []  # If you have custom static folders inside apps
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
